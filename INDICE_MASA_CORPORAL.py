@@ -4,14 +4,12 @@ print "****************************************************"
 print "******** CALCULO DE INDICE DE MASA CORPORAL ********"
 print "****************************************************"
 
-try:
-    peso = raw_input ("Ingrese su peso: ")
-    estatura = raw_input ("Ingrese su estatura: ")
-except:
-    print "Introduzca un numero"
-    
+
+peso = raw_input ("Ingrese su peso: ")
 peso=float(peso)
+estatura = raw_input ("Ingrese su estatura: ")
 estatura=float(estatura)
+
 imc=peso/(estatura**2)
 print "Su indice de masa corporal es : ",imc
 print "Su clasificacion es:"

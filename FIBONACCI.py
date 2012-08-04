@@ -6,6 +6,7 @@ print ""
 print "****************************************************"
 print "************* CALCULO SERIE FIBONACCI **************"
 print "****************************************************"
+
 valor = input("Ingrese el numero de la serie que desea generear: ")
 num1=0
 num2=1
