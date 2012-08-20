@@ -23,7 +23,6 @@ def  numeros(x):
 def ordenar_insert(vector,x):
     comp=0
     inter=0
-    ini_relog= time.clock ()
     for i in range(0,x):
         comp=comp+1
         aux=vector[i]
@@ -33,46 +32,34 @@ def ordenar_insert(vector,x):
             j=j-1
             inter = inter+1
         vector[j]=aux;
-    fin_relog=time.clock ()-ini_relog
     print "Comparaciones:",comp
     print "Intercambios:",inter
-    print "Tiempo proceso:",fin_relog
     return vector
 
 
 # Funcion para ordenar ascendentemente por el metodo de Mergsort
-def ordena_mergsort (arreglo1,n1,arreglo2,n2):
-    vect_ord=[]
+def ordena_mergsort (arreglo1,arreglo2):
+    vect_ord = []
     i=0
     j=0
-    while i < n1 and j < n2:
+    while i < len(arreglo1) and j < len(arreglo2):
         if  arreglo1[i]<=arreglo2[j]:
             vect_ord.append(arreglo1[i])
             i+=1
         else:
             vect_ord.append(arreglo2[j])
             j+=1
-    vect_ord +=arreglo1[i:]
-    vect_ord +=arreglo2[j:]
+    vect_ord += arreglo1[i:]
+    vect_ord += arreglo2[j:]
+    return vect_ord
     
-def divide_mergsort(vector,x):
-    n1=0
-    n2=0
-    if x>1:
-        print vector
-        if (x%2==0):
-            n1=n2= x / 2                     
-        else:
-            n1=x / 2
-            n2=n1+1
-        mitad=len(vector)/2
-        print vector[:mitad]
-        print vector[mitad:]
-        arreglo1=divide_mergsort(vector[:mitad],n1)
-        print arreglo1
-        arreglo2=divide_mergsort(vector[mitad:],n2)
-        print arreglo2
-        return ordena_mergsort(arreglo1,n1,arreglo2,n2)                          
+def divide_mergsort(vector):
+    if len(vector)<2:
+        return vector
+    mitad=len(vector)/2
+    arreglo1=divide_mergsort(vector[:mitad])
+    arreglo2=divide_mergsort(vector[mitad:])
+    return ordena_mergsort(arreglo1,arreglo2)                          
 
 
         
@@ -85,11 +72,17 @@ print "El vector a ordenar es:",vec_insert
 #Imprime Metodo Insercion
 print ""
 print "-----------------------METODO INSERCION-----------------------"
+ini_relog= time.clock ()
 vec_ord=ordenar_insert(vec_insert,cant)
+fin_relog=time.clock ()-ini_relog
+print "Tiempo proceso:",fin_relog
 print ""
 #Imprime Metodo Mersort
 print "-----------------------METODO MERGSORT------------------------"
-vec_ord=divide_mergsort(vec_merg,cant)
+ini_relog= time.clock ()
+vec_ord=divide_mergsort(vec_merg)
+fin_relog=time.clock ()-ini_relog
+print "Tiempo proceso:",fin_relog
 print ""
 #print "Tiempo proceso:",fin_relog
 print ""
