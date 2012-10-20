@@ -24,52 +24,72 @@ def  numeros(x):
     return vec_ini,vec_ini2,vec_ini3
 
 # Funcion para ordenar ascendentemente por el metodo HEAPSORT
-def ordenar_heapsort():
-    for i in range(1,x):
-        for j in range (0,x-1):
-            comp=comp+1
-            if vector[j]>vector[j+1]:
-                aux=vector[j]
-                vector[j]=vector[j+1]
-                vector[j+1]=aux
-                inter = inter+1       
-    print "Comparaciones:",comp
-    print "Intercambios:",inter
+def ordenar_heapsort(vector,tam):
+    inicio = (tam-2)/2
+    while inicio >= 0:
+        crearheap(vector, inicio, tam-1)
+        inicio=inicio-1
+    fin = tam-1    
+    while fin > 0:
+        vector[fin], vector[0] = vector[0], vector[fin]
+        crearheap(vector, 0, fin-1)
+        fin = fin-1
     return vector
-                     
+
+def crearheap(vector, inicio, fin):
+    i = inicio
+    while i * 2 + 1 <= fin:
+        j = i * 2 + 1
+        if j + 1 <= fin and vector[j] < vector[j + 1]:
+            j=j+1
+        if j <= fin and vector[i] < vector[j]:
+            vector[i], vector[j] = vector[j], vector[i]
+            i = j
+        else:
+            return
+
+# Funcion para ordenar ascendentemente por el metodo QUICKSORT
+def vec_quicksort(vector,tam):
+    inicio = (tam-2)/2
+    while inicio >= 0:
+        crearheap(vector, inicio, tam-1)
+        inicio=inicio-1
+    fin = tam-1    
+    while fin > 0:
+        vector[fin], vector[0] = vector[0], vector[fin]
+        crearheap(vector, 0, fin-1)
+        fin = fin-1
+    return vector
+
+
+    
+
 
 
         
 
 #Arranque del programa
 cant=input("Ingrese la cantidad de numeros que desea ordenar: ")
-vec_burbuja,vec_merg,vec_insert = numeros(cant)
+vec_heapsort,vec_quicksort,vec_insert = numeros(cant)
 print ""
 print "El vector a ordenar es:",vec_insert
-#Imprime Metodo Burbuja
+#Imprime Metodo Heapsort
 print ""
-print "-----------------------METODO BURBUJA-----------------------"
+print "-----------------------METODO HEAPSORT-----------------------" 
 ini_relog= time.clock ()
-vec_ord=ordenar_burbuja(vec_burbuja,cant)
+vec_ord=ordenar_heapsort(vec_heapsort,cant)
 fin_relog=time.clock ()-ini_relog
+print "Vector Ordenado:",vec_ord
 print "Tiempo proceso:",fin_relog
 print ""
-#Imprime Metodo Insercion
-print ""
-print "-----------------------METODO INSERCION-----------------------"
+print "-----------------------METODO QUICKSORT-----------------------" 
 ini_relog= time.clock ()
-vec_ord=ordenar_insert(vec_insert,cant)
+vec_ord=ordenar_quicksort(vec_quicksort,cant)
 fin_relog=time.clock ()-ini_relog
+print "Vector Ordenado:",vec_ord
 print "Tiempo proceso:",fin_relog
 print ""
-#Imprime Metodo Mersort
-print "-----------------------METODO MERGSORT------------------------"
-ini_relog= time.clock ()
-vec_ord=divide_mergsort(vec_merg)
-fin_relog=time.clock ()-ini_relog
-print "Tiempo proceso:",fin_relog
-print ""
-print "El vector ordenado ascendentemente es:",vec_ord
+
 
 raw_input()
 
